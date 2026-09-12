@@ -1,0 +1,29 @@
+# Windows download metadata (Zone.Identifier ADS files from the original zip)
+*.Zone.Identifier
+
+# Secrets / credentials — never commit (.env.example is safe to commit)
+.env
+.env.*
+!.env.example
+
+# Local run artifacts generated when the skill executes in a project
+TELEMETRY*.jsonl
+.run-model
+prd.json
+progress.txt
+build.log
+
+# Claude Code session tracking
+.claude/
+
+# Node / test / OS junk
+node_modules/
+*.log
+.playwright/
+.DS_Store
+Thumbs.db
+
+# Research / analysis scratch
+2026-fullstack-stack-research.json
+GAP_ANALYSIS_2026.json
+.playwright-mcp/
