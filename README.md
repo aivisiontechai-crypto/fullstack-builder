@@ -183,6 +183,57 @@ do not ship in the skill repo.
 
 ---
 
+
+## Premium-UI capability (this skill's reason to exist)
+
+The engine builds a *functional* product. This skill adds the layer that makes it
+feel like a shipped product rather than a generated prototype: a complete
+premium-UI toolchain, resolved once at bootstrap (the Phase U Capability Ladder)
+and wired into every phase. It is a first-class, gated deliverable — not an
+afterthought.
+
+**"Premium" means, mechanically:**
+- **Distinctive, not pretty.** The palette differs from the default SaaS triad
+  (`blue+Inter`, purple gradient); there is a signature element; the hero is
+  not `[centered label, centered H1, centered button]`. A 6-criterion
+  machine-checkable validator gates the "distinctive" claim — a text-only
+  agent can never claim a look it could not see.
+- **Intentional motion, not decoration.** At most 1 scroll-linked entrance per
+  section, ≤2 simultaneously-moving hero elements. `transition-all` and
+  `animate-pulse` on static elements are auto-fail.
+- **One visual world.** Palette + font pairing + mood from Phase U hold across
+  every screen; variation comes from layout and composition, not drifting
+  colors/type per page.
+- **Gated, not vibes.** `design-gate.js` runs in CI on every PR; the
+  prize-worthiness validator gates the claim; the final report states exactly
+  which capability tier ran vs fell back.
+
+**The 7-tier capability ladder (resolved at bootstrap, degrades by tier):**
+
+| Tier | Capability | Primary skill | Fallback |
+|---|---|---|---|
+| 1 | Direction (not the default look) | `frontend-design` (anthropics, 847K+ installs) | in-SKILL Quick Reference |
+| 2 | Real design system with tokens | `ui-ux-pro-max --design-system` (needs `python3`) | hand-authored `docs/DESIGN.md` |
+| 3 | Typography with personality | `typeset` (pbakaus/impeccable, 64.9K installs) | spine type-scale rules |
+| 4 | Intentional motion | `review-animations` (97.6K) → `ui-animation` (7.2K) → `framer-motion-animator` (8K) → `motion-design-skill` (11K) → `iart-ai/web-animation-skills` (GSAP/SVG/Lottie/glassmorphism in one MIT pack) | CSS transitions + `@starting-style` |
+| 5 | Real assets (image/icon/motion/3D/font) | `ai-image-generation` (102K) → `lottie`/text-to-lottie → `@rive-app/react-webgl2` → `react-three-fiber`+`drei` → `@tabler-icons`/`lucide`/`phosphor-icons` → `next/font` self-hosted | licensed stock, hand-authored SVG, no placeholder service URL |
+| 6 | Composition that is not default shadcn | `shadcn` (251.8K) → `building-components` (vercel) → `magic-ui` → `frontend-ui-engineering` + `web-design-guidelines` → `redesign-existing-projects` (221.6K) | hand-compose from `docs/DESIGN.md` tokens |
+| 7 | Adversarial, mode-guided critique | `impeccable` + its `bolder`/`colorize`/`animate`/`delight`/`polish`/`distill`/`clarify`/`adapt`/`onboard`/`harden` commands + `ask-sonner` | mechanical checks: axe/`pa11y`, headless Lighthouse CWV, keyboard operability, `design-gate.js` |
+
+**Degradation rule:** a tier that fails to install degrades to its fallback column
+*for that tier only* — the pipeline continues, and the final report states
+which tier fell back and why. A tier that silently does not run is a defect,
+not a feature.
+
+**New in this version:** the known-source map and integrated skill map now cover
+the full premium-UI stack (emilkowalski/skills 10-skill pack, mblode `ui-animation`,
+patricio0312rev `framer-motion-animator`, C-Jeril/framer-motion-skills 7-skill pack,
+lottiefiles `motion-design-skill`, diffusionstudio `lottie` text-to-lottie,
+iart-ai/web-animation-skills 8-skill pack, leonxlnx/taste-skill, and the
+pbakaus/impeccable command vocabulary). Phase 4 gained an **asset pass** (4b)
+and a **fresh-eyes contrast pass** (4c) so template-flatness is fixed at the
+source rather than patched after the fact.
+
 ## Non-negotiables
 
 - **Hands-free** — no clarifying questions; every choice recorded in `docs/DECISIONS.md`.

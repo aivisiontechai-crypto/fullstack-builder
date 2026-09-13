@@ -7,6 +7,47 @@ description: Build a complete fullstack web product — real DB, real auth, real
 
 # fullstack-builder — idea → shipped fullstack web product, great-UI-first
 
+
+## One-stop premium-UI capability (this skill's reason to exist)
+
+The engine builds a *functional* product. This skill adds the layer that makes
+it feel like a shipped product rather than a generated prototype: a complete
+premium-UI toolchain, resolved once at bootstrap and wired into every phase.
+
+**What "premium" means here, mechanically:**
+- Not "pretty" — *distinctive*. The palette differs from the default SaaS triad
+  (`blue+Inter`, purple gradient); there is a signature element (criterion 2 of
+  the prize-worthiness gate); the hero is not `[centered label, centered H1,
+  centered button]` (criterion 3).
+- Not "decorated" — *intentional*. Motion follows the spine's budget: at most
+  **1** scroll-linked entrance per section, **≤2** simultaneously-moving hero
+  elements. Every animation has a job; `transition-all` and `animate-pulse` on
+  static elements are auto-fail.
+- Not "themed" — *one visual world*. Palette + font pairing + mood from Phase U
+  hold across every screen. Variation comes from layout and composition, not
+  from drifting colors/type per page.
+- Not "bolted on" — *gated*. `design-gate.js` runs in CI on every PR; the
+  prize-worthiness validator (6 machine-checkable criteria) gates the "distinctive"
+  claim; a text-only agent can never claim a look it could not see.
+
+**The capability ladder (Phase U, resolved at bootstrap):**
+
+| Tier | Capability | Primary skill | Fallback |
+|---|---|---|---|
+| 1 | Direction (not the default look) | `frontend-design` (anthropics, 847K+) | in-SKILL Quick Reference |
+| 2 | Real design system with tokens | `ui-ux-pro-max --design-system` (needs `python3`) | hand-authored `docs/DESIGN.md` |
+| 3 | Typography with personality | `typeset` (pbakaus/impeccable, 64.9K) | spine type-scale rules |
+| 4 | Intentional motion | `review-animations` (97.6K) → `ui-animation` (7.2K) → `framer-motion-animator` (8K) → `motion-design-skill` (11K) → `iart-ai/web-animation-skills` (GSAP/SVG/Lottie/glassmorphism in one MIT pack) | CSS transitions + `@starting-style` |
+| 5 | Real assets (image/icon/motion/3D/font) | `ai-image-generation` (102K) → `lottie`/text-to-lottie (3.6K★) → `@rive-app/react-webgl2` → `react-three-fiber`+`drei` → `@tabler-icons`/`lucide`/`phosphor-icons` → `next/font` self-hosted | licensed stock, hand-authored SVG, no placeholder service URL |
+| 6 | Composition that is not default shadcn | `shadcn` (251.8K) → `building-components` (vercel) → `magic-ui` → `frontend-ui-engineering` + `web-design-guidelines` → `redesign-existing-projects` (221.6K) | hand-compose from `docs/DESIGN.md` tokens |
+| 7 | Adversarial, mode-guided critique | `impeccable` + its `bolder`/`colorize`/`animate`/`delight`/`polish`/`distill`/`clarify`/`adapt`/`onboard`/`harden` commands + `ask-sonner` | mechanical checks: axe/`pa11y`, headless Lighthouse CWV, keyboard operability, `design-gate.js` |
+
+**Degradation rule:** a tier that fails to install degrades to its fallback column
+*for that tier only* — the pipeline continues, and the final report states
+exactly which tier fell back and why. A tier that silently does not run is a
+defect, not a feature. See the Phase U Capability Ladder in Phase 1 for the
+resolution order and the per-tier fallbacks.
+
 You are the tech lead shipping a full web product to production with a
 UI that earns its reputation — an internal tool, marketplace, dashboard,
 content product, or SaaS (the flagship category: pricing/subscriptions,
@@ -131,7 +172,16 @@ Never start a run against missing hard deps and never assume a cold machine.
    | `k6` | `grafana/skills@k6` |
    | `seo` | `addyosmani/web-quality-skills@seo` |
    | `email-best-practices`, `react-email` | `resend/<name>` |
-   | `vercel-react-best-practices`, `vercel-react-view-transitions`, `vercel-optimize`, `vercel-composition-patterns`, `web-design-guidelines`, `vercel-cli-with-tokens` | `vercel-labs/agent-skills@<name>` |
+   | `vercel-react-best-practices`, `vercel-react-view-transitions`, `vercel-optimize`, `vercel-composition-patterns`, `web-design-guidelines`, `vercel-cli-with-tokens` | `vercel-labs/agent-skills@<name> |
+   | `emilkowalski/skills` (10 skills: `emil-design-eng`, `review-animations`, `bolder`, `typeset`, `animate`, `ask-sonner`, `distill`, `colorize`, `delight`, `polish`) | `emilkowalski/skills` (694K+ installs combined; 204.4K on `emil-design-eng` alone; the single highest-signal design-quality pack on skills.sh — teaches agents to *recognise* bad AI UI and audit motion instead of sprinkling it) |
+   | `mblode/agent-skills` — `ui-animation` | `mblode/agent-skills@ui-animation` (7.2K installs; hardware-accelerated UI animation beyond opacity/transform) |
+   | `patricio0312rev/skills` — `framer-motion-animator` | `patricio0312rev/skills@framer-motion-animator` (8K installs; production Framer Motion code for entrances, gestures, scroll) |
+   | `C-Jeril/framer-motion-skills` (7 skills: `framer-motion-core`, `-react`, `-variants`, `-scroll`, `-gestures`, `-layout`, `-svg`) | `C-Jeril/framer-motion-skills` (correct Framer Motion usage per concern — variants, gestures, scroll, shared-layout, SVG) |
+   | `lottiefiles/motion-design-skill` | `lottiefiles/motion-design-skill` (11K installs; universal motion choreography — timing, easing, Disney principles for UI) |
+   | `diffusionstudio/lottie` (text-to-lottie) | `diffusionstudio/lottie` (3.6K stars, MIT; generate production Lottie JSON from text/SVG — the agent writes the animation, not a runtime fetch) |
+   | `iart-ai/web-animation-skills` (8 skills: `gsap-web`, `60fps-animation`, `page-transition-animation`, `accessible-animation`, `micro-interaction`, `glassmorphism`, `svg-animation`, `lottie-animation`) | `iart-ai/web-animation-skills` (MIT; one pack covers GSAP/SVG/Lottie/micro-interactions/glassmorphism/reduced-motion — the broadest single motion purchase) |
+   | `leonxlnx/taste-skill` — `redesign-existing-projects`, `high-end-visual-design` | `leonxlnx/taste-skill@<name>` (221.6K installs; audits existing UI against generic-AI patterns and upgrades to premium standard without breaking function) |
+   | `pbakaus/impeccable` — `bolder`, `typeset`, `colorize`, `animate`, `delight`, `polish`, `distill`, `clarify`, `adapt`, `onboard`, `harden` | `pbakaus/impeccable@<name>` (29.9K stars; the mode-guided refine vocabulary Phase 4 already references — each name is a *command* the skill exposes) |
    | **spec-kit (GitHub)** — `specify-cli` + core SDD commands (`constitution`, `specify`, `plan`, `tasks`, `implement`, `analyze`, `clarify`, `checklist`) + extensions (`bug-fix`, `assess`) | **`github/spec-kit`** (MIT) — install CLI via `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v<tag>`, then `specify init <proj> --integration <agent>`; or as an Agent Skill bundle via `npx skills add github/spec-kit` when published. **Note: v0.8.x has NO `converge` command** — convergence is `speckit.implement` (task validation) + `speckit.checklist` (requirements-quality unit tests); see Phase 2 §2. |
 
    Pin a tagged ref/commit when the source exposes one; never widen the
@@ -640,6 +690,23 @@ AND `.specify/` directory exists in project root.
      - **Mandate OKLCH color space** in all token definitions (Tailwind v4 `@theme` supports native OKLCH); update `design-system` skill to output OKLCH values.
      - **Add modern CSS features** to DESIGN.md tokens: `@starting-style` for entry animations, anchor positioning for tooltips/popovers, container queries for component-level responsiveness, scroll-driven animations via `animation-timeline`.
      - Commit the result as a `docs/DESIGN.md` skeleton (tokens: colors → semantic roles in OKLCH, typography scale, spacing, radius, shadows, motion easing/durations, light/dark, container queries, scroll animations) and record the choice in `DECISIONS.md`.
+
+
+#### Phase U Capability Ladder (what gets loaded, in order)
+
+A fresh host may have none of the premium-UI skills installed. Resolve them in this order — each tier is a *capability*, and the skill degrades by tier, never silently skips a tier and claims it ran. Record what actually loaded in `DECISIONS.md`.
+
+| Tier | Capability | Skills (in resolution order) | Fallback if absent |
+|---|---|---|---|
+| **1 — direction** | A visual world that is not the default shadcn look | `frontend-design` (anthropics/skills, 847K+ installs — the single highest-signal anti-slop purchase) → `design-taste-frontend` → `impeccable` | Author the direction from the in-SKILL Quick Reference (styles/palettes/font-pairs) — same output contract, search-driven source only |
+| **2 — system** | A real design system with tokens, not vibes | `ui-ux-pro-max` `--design-system` search (preferred, needs `python3`) → `design-md` brand seed → `design-system` | Hand-author `docs/DESIGN.md` from the fallback above; note "search.py not run" in `DECISIONS.md` |
+| **3 — type** | Typography that has a personality | `typeset` (pbakaus/impeccable, 64.9K installs — systematically refines typography to eliminate generic defaults) → `frontend-design` typography rules | Apply the spine's type-scale rules with a self-hosted pairing |
+| **4 — motion** | Intentional animation, not decoration | `review-animations` (emilkowalski/skills, 97.6K installs — *adversarial* audit of motion code) → `emil-design-eng` craft philosophy → `ui-animation` (mblode, 7.2K) → `framer-motion-animator` (8K) → `motion-design-skill` (lottiefiles, 11K) → `iart-ai/web-animation-skills` (GSAP/SVG/Lottie/glassmorphism in one MIT pack) | CSS-only transitions + `@starting-style`; the spine's motion budget still applies |
+| **5 — assets** | Real imagery, icons, and 3D | `ai-image-generation` (102K installs — 50+ models via inference.sh, FLUX/Seedream/Gemini) → `lottie` (diffusionstudio, text-to-lottie — the agent *generates* the animation, never a runtime fetch) → `@rive-app/react-webgl2` (interactive state-machine components) → `react-three-fiber` + `@react-three/drei` (the prize-worthiness gate's signature-element requirement) → `@tabler-icons`/`lucide`/`phosphor-icons` (weight-controlled icon sets) | Self-hosted `next/font`, unlicensed stock from the project's own asset dir, hand-authored SVG — never a placeholder service URL |
+| **6 — composition** | Components that are not default shadcn | `shadcn` (correct CLI + registry usage, 251.8K installs) → `building-components` (vercel/components.build, composable APIs + theming) → `magic-ui` (animated registry: marquee/globe/blur-fade/shiny-button) → `frontend-ui-engineering` + `web-design-guidelines` (production patterns, a11y, states, responsive) → `redesign-existing-projects` (leonxlnx/taste-skill, 221.6K — audits and upgrades generic UI to premium without breaking function) | Hand-compose from `docs/DESIGN.md` tokens; the spine's anti-slop bans still apply |
+| **7 — critique** | An adversarial, mode-guided polish pass | `impeccable` (critique + audit, desktop AND mobile in one batch) → `bolder`/`colorize`/`animate`/`delight`/`polish`/`distill`/`clarify`/`adapt`/`onboard`/`harden` (pbakaus/impeccable — each is a *command* the skill exposes, invoked per surface mode) → `ask-sonner` (correct toast usage) | Mechanical checks only: axe-core/`pa11y` contrast, CWV via headless Lighthouse, keyboard operability, semantic landmarks, `design-gate.js` static review |
+
+**Rule:** a tier that fails to install degrades to the fallback column *for that tier only* — the pipeline continues, and the final report states exactly which tier fell back and why. A tier that silently does not run is a defect, not a feature.
 
 #### DESIGN.md Generation Contract (anti-slop + prize-worthy design, from the source)
 
@@ -2260,17 +2327,37 @@ never silently stopped mid-evidence.
    obvious wins (`layout`, `typeset`, `clarify`) in a single pass. Install
    the `impeccable hooks` design-detector before editing so regressions
    surface automatically during the batch.
-4. **One refine pass per surface, mode-guided:** Persuade → `bolder`/`delight`/
-   `colorize`/`animate`; Operate → `polish`/`harden`/`distill`/`clarify`/
-   `adapt`; Activation → `onboard` (first-run flows, empty states,
-   activation) then `clarify`/`polish`; Read → `distill`/`typeset`. Leverage
-   `design-taste-frontend` and
-   `emil-design-eng` (motion/craft philosophy) for direction; `magic-ui`
-   for marquee/globe/blur-fade effects before hand-rolling animation. Add
-   `vercel-react-view-transitions` page transitions and `shadcn`-correct
-   components if any surface feels template-flat. Dashboards needing data
-   viz use `ui-ux-pro-max`'s chart guidance (25 chart types; a11y-first
-   labeling per `frontend-ui-engineering`) — never a decorative chart.
+    `design-taste-frontend` and
+    `emil-design-eng` (motion/craft philosophy) for direction; `magic-ui`
+    for marquee/globe/blur-fade effects before hand-rolling animation. Add
+    `vercel-react-view-transitions` page transitions and `shadcn`-correct
+    components if any surface feels template-flat. Dashboards needing data
+    viz use `ui-ux-pro-max`'s chart guidance (25 chart types; a11y-first
+    labeling per `frontend-ui-engineering`) — never a decorative chart.
+
+    **4b. Asset pass (new — the generic-UI fix).** Template-flatness almost
+    always traces to missing assets, not missing CSS. Before declaring a
+    surface done, confirm each of these is *real* and *on-brand*:
+    - **Imagery:** licensed or generated (Pollinations-and-commit at build
+      time, or the user's own) — never a placeholder service URL. `next/image`
+      with real `alt`; no `next/image` wildcard `remotePatterns`.
+    - **Icons:** one icon system with weight/variant control (`@tabler-icons`,
+      `lucide-react`, `phosphor-icons`) — not the default outlined set.
+    - **Motion:** at least one of — a hand-authored `@keyframes`/WebGL/Canvas/Rive/Lottie
+      asset in the bundle (this is also the prize-worthiness gate's criterion 2).
+      Prefer `diffusionstudio/lottie` (text-to-lottie) for generated motion and
+      `@rive-app/react-webgl2` for interactive state-driven components.
+    - **3D:** if the product has a hero or a signature moment, `react-three-fiber`
+      + `@react-three/drei` — a real scene in the bundle, not a CSS gradient.
+    - **Fonts:** `next/font` self-hosted or `@fontsource` — zero layout shift,
+      no `fonts.googleapis.com` in the production bundle.
+
+    **4c. Fresh-eyes contrast pass.** After the batched fix, re-render each
+    surface and run `impeccable`'s `contrast` + `typeset` commands against
+    the *new* state. A fix that solves one slop pattern and introduces a
+    contrast or hierarchy regression is not a fix — it is a swap. Record
+    before/after in `docs/ui-gallery/`.
+
 5. **Live browser iteration (the improvise).** Run the app as a local
    production build (`next build && next start`) — dev-mode screenshots and
    CWV mislead, so evidence comes from the production bundle. Load it and
@@ -2463,6 +2550,16 @@ never silently stopped mid-evidence.
 | `tanstack-query`, `tanstack-router` | Server state + type-safe routing (Phase 2) |
 | `zustand`, `jotai` | Client state management (Phase 2) |
 | `framer-motion`, `gsap`, `motion-one` | Animation stack (Phase 2/4) |
+| `lottie` (`@lottiefiles/dotlottie-react`, `react-lottie`) | Lottie playback + text-to-lottie generation (Phase 4 hero/empty states) |
+| `@rive-app/react-webgl2` | Interactive Rive components with state machines (Phase 4 — buttons, toggles, loaders that respond to real state) |
+| `react-three-fiber`, `@react-three/drei`, `three` | WebGL/3D in the bundle (Phase 4 signature element — the prize-worthiness gate requires at least one hand-authored 3D/motion asset) |
+| `lenis` | Smooth-scroll container (Phase 4 — one scroll-linked entrance per section, never on every section) |
+| `shadcn/ui` + `@magicui-components` | shadcn-correct components + animated registry (marquee, globe, blur-fade, shiny-button) |
+| `@tabler/icons`, `lucide-react`, `phosphor-icons` | Icon systems with real weight/variant control — never the default outlined set |
+| `next/font` (self-hosted) + `@fontsource` | Web font loading with zero layout shift — no `google-fonts` CDN in production |
+| `@radix-ui/themes`, `@base-ui-components` | Accessible, themable component primitives when shadcn alone is too flat |
+| `sonner` | Toast system (the spine requires toasts on success; `ask-sonner` owns the correct usage) |
+| `react-email` | Transactional email templates (already listed) |
 | `arcjet` | Bot detection, rate limiting, attack protection (Phase 2) |
 | `opentelemetry-js` | Native OTel instrumentation (Phase 2) |
 | `highlight-io` / `logrocket` | Session replay with PII masking (Phase 3) |
