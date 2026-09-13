@@ -25,7 +25,7 @@ product, or SaaS. Run the **fullstack-builder** skill end-to-end, hands-free:
 - Constitution → establishes governing principles (code quality, testing, UX, performance, security)
 - Specify → adds formal traceability layer (Constitution → Spec → Plan → Tasks → Code)
 - Plan + Tasks → feeds ralph stories with spec-kit traceability
-- Converge → validates at US-002, every 5 stories, and pre-Phase 3; appends corrective tasks on drift
+- Convergence → `/speckit.implement` (task validation) + `/speckit.checklist` (requirements-quality unit tests) at US-002, every 5 stories, and pre-Phase 3; appends corrective tasks on drift (spec-kit v0.8.x has no `converge` command)
 
 ## Fully hands-free mode (walk away and it finishes)
 
@@ -60,21 +60,21 @@ skip.
 1. **Invoke the `fullstack-builder` skill** and follow its pipeline. Create
    a todo list covering all phases and keep it updated as work lands.
 2. **Phase U + Constitution** — before any docs, lock the visual world:
-   run `ui-ux-pro-max`'s `--design-system` search (python3-present
-   preferred, Quick-Reference fallback), check `design-md` for a brand
-   system, lock brand voice, **run `/speckit.constitution`** to establish
-   governing principles, and commit a `docs/DESIGN.md` token skeleton
-   (colors→semantic roles, type, spacing, radius, shadows, motion).
+   resolve the 7-tier premium-UI capability ladder (direction → design
+   system → typography → motion → assets → composition → critique), each
+   tier with a recorded fallback; then **run `/speckit.constitution`** to
+   establish governing principles, and commit a `docs/DESIGN.md` token
+   skeleton (colors→semantic roles, type, spacing, radius, shadows, motion).
 3. **Unified pipeline (spec-kit enhances, not replaces):**
    - Feed brief + DESIGN.md + CONSTITUTION.md into **vibe-docs** → 14 docs + `prd.json`
    - Run `/speckit.specify` → `docs/SPEC.md` (auditable lineage, augments vibe-docs output)
    - Run `/speckit.plan` → `docs/PLAN.md` (augments ARCHITECTURE/DATA_MODEL/TEST_PLAN)
    - Run `/speckit.tasks` → map to ralph stories in `prd.json` (replaces planning-and-task-breakdown)
    - Run **vibe-build ralph loop** with **injected gates**:
-     - Per-iteration UI gates (rules 21-26 in AGENTS.md)
-     - `/speckit.converge` at US-002, every 5 stories, pre-Phase 3 (validates, appends corrective tasks)
+     - Per-iteration UI gates (the 20 rules in AGENTS.md + the injected UI gates)
+     - `/speckit.implement` + `/speckit.checklist` at US-002, every 5 stories, pre-Phase 3 (validates, appends corrective tasks)
      - Story retry/backoff (3×), dependency graph (parallel where safe), cost/token budget
-   - Loop continues until **both** `<promise>COMPLETE</promise>` **and** `/speckit.converge` reports Converged
+   - Loop continues until **both** `<promise>COMPLETE</promise>` **and** `/speckit.implement` + `/speckit.checklist` report no drift
 4. **Final gates** — builder's Phase 3 + automated PR description, release notes,
    ERD, Storybook, a11y regression, performance budgets, bundle gate, E2E recording,
    seed from prod, DR drill, compliance, threat model, data flow, runbook,

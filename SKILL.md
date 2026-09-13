@@ -193,19 +193,27 @@ Never start a run against missing hard deps and never assume a cold machine.
    ≥100 stars).
 5. **Outcome per tier:**
 - **Engine tier** (`builder`, `vibe-docs`, `vibe-build`, `vibe-evolve`) —
-      bundled in this skill at `skills/<name>` — install by copying the
+      bundled in this skill at `skills/<name>/` — install by copying the
       bundle into any discovery root, or read the bundled `SKILL.md` directly
       when the host supports file-path skill loading. If the bundle itself is
       missing, STOP and report the error; this skill is an envelope around
       the engine, so a missing engine is the one hard block.
-   - **Hard-dep tier** (everything in the Integrated skill map that a phase
-     gates on) — install; if verification fails, degrade THAT phase
-     explicitly (say what's skipped and why) and continue — never silently
-     run without it.
-   - **Collateral tier** (`brand`, `design-system`, `design`, `banner-design`,
-     `slides`, `design-md`) — nice-to-have; skip cleanly if unresolvable
-     and mark the capability unused in the final report.
-
+- **Hard-dep tier (engine)** — everything `builder`/`vibe-build`/`vibe-docs`
+      gates on (security, data, testing, deploy, spec-kit). Install; if
+      verification fails, degrade THAT phase explicitly (say what's skipped
+      and why) and continue — never silently run without it.
+- **Hard-dep tier (premium UI)** — the 7-tier capability ladder in Phase 1
+      (direction, design system, typography, motion, assets, composition,
+      critique). Install in order; a tier that fails degrades to its recorded
+      fallback *for that tier only* and the pipeline continues. The final
+      report states exactly which tier fell back and why. A tier that
+      silently does not run is a defect, not a feature.
+- **Collateral tier** (`brand`, `design`, `banner-design`, `slides`,
+      `design-md` as a *brand seed* only) — nice-to-have; skip cleanly if
+      unresolvable and mark the capability unused in the final report.
+- **Reference tier** (LEDGER `references:` and the research stack) —
+      never installed at run time; patterns only, applied at specific steps
+      and documented as such.
 Installs are recorded in `~/.agents/skills/LEDGER.md` (flock-locked) so
 later runs reuse rather than re-hunt. After bootstrap completes, Phase 0's
 prerequisite 7 re-verifies everything present before Phase 1 starts.
@@ -1839,7 +1847,7 @@ This closes the `speckit.plan`/`speckit.tasks` enforcement hole: the LLM's
 diligence is no longer the only thing standing between a skeleton and a
 real plan/task list.
 
-### Phase 2 — build (engine-owned, UI gates + spec-kit converge injected)
+### Phase 2 — build (engine-owned, UI gates injected)
 
 Run `vibe-build`'s ralph loop as-is, with two altered files:
 
@@ -3016,5 +3024,5 @@ See `docs/MEMORY.md` in this skill — contains sections for:
 
 ### v1.0.0 (initial)
 - Core pipeline: Phase U → vibe-docs → vibe-build → Phase 4 IMPROVISE
-- UI gates (rules 21-26), spec-kit as optional flag
+- UI gates (rules 21-32 appended to AGENTS.md), spec-kit as optional flag
 - 7-layer self-evolution (telemetry, swap, dynamic phases, prompt evolution, gap discovery, patterns, skill updates)
