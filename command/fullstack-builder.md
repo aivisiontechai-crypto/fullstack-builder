@@ -80,6 +80,7 @@ skip.
    seed from prod, DR drill, compliance, threat model, data flow, runbook,
    scaling rules, onboarding, ADR template.
 5. **IMPROVISE** — surface-moded critique (Persuade/Operate/Activation/Read),
+   then **run the prize-worthiness gate** (`node <skill-dir>/scripts/prize-gate.js <project>` — 6 machine-checkable criteria) before claiming "distinctive"; the report goes to `docs/prize-gate.json` and is quoted into `DECISIONS.md`.
    cross-checked against the Figma-derived pattern library (SKILL.md §8) and
    the chosen `design-md` brand seed; one batched fix, mode-guided refine
    (`bolder`/`polish`/`animate`/`onboard`/`typeset`), Playwright scripted

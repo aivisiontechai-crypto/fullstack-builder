@@ -720,7 +720,7 @@ A fresh host may have none of the premium-UI skills installed. Resolve them in t
 
 **DESIGN.md is not a token list. It is a complete, prescriptive component-by-component design spec.** Every page, every component, every state is specified with exact values before any code is written. An AI implementing from this spec should have **zero decisions to make** about layout, spacing, colors, typography, or component structure — it just follows the spec. It also **mandates that the result be distinctive and memorable** (Section 7), not merely clean — because a layout that avoids every slop trap but is bland is still a failure.
 
-**DESIGN.md MUST contain ALL 7 sections below. Missing any section = block Phase 2.**
+**DESIGN.md MUST contain ALL 11 sections below. Missing any section = block Phase 2. (Sections 1-7 are the anti-slop core; 8-11 are the vibe-coding and research catalogues that make the output distinctive rather than merely correct.)**
 
 ##### Section 1: Design Tokens (OKLCH, exact values)
 
@@ -1131,6 +1131,8 @@ The checklist above is directional, not the gate. A surface only passes "distinc
 6. **Fresh-context adversarial review.** A **fresh subagent with no memory of the build** reviews the shipped surfaces against the Section 7 ambition + the UI-spine anti-patterns and issues a `distinctive-or-not` verdict with named evidence. It cannot defer to the build agent's own self-assessment. `impeccable critique` is the sanctioned mechanism; it must return no HIGH/CRITICAL from the UI-spine table and explicitly confirm the two "would-it-stand-out" signals are met with specific cited elements.
 
 The gate **fails** if any criterion 1–6 fails. Because the checklist could previously be satisfied by a blank YES, the validator's pass is recorded in `DECISIONS.md` quoting the *evidence* (the @theme hue, the signature file, the hero layout), not "looks good". A claim like "prize-worthy" in the final report is only allowed when this validator passed on the shipped (Phase 4) surfaces — otherwise the report must say "distinctive-undetermined", not assert it.
+
+    **The gate is implemented by `scripts/prize-gate.js`** (ships with this skill). Before this script existed the claim was prose — a text-only agent could answer YES to a checklist and ship a generic UI. Now the pass is machine-checked: run `node scripts/prize-gate.js <project>` before claiming "distinctive / prize-worthy" in `DECISIONS.md`.
 
 **Cross-check before locking DESIGN.md direction (Phase 1 step 2):**
 Run `impeccable` direction commands on the chosen direction: Persuade-mode products → `bolder`/`delight`/`colorize`/`animate`; Operate-mode → `polish`/`distill`. Use `design-taste-frontend` (anti-templated) and `emil-design-eng` (motion/craft philosophy) to sharpen the signature choice before writing tokens. If the direction reads "safe" or "template-y," pull it toward a bolder reference (any of: awwwards.com, landing.love, 21st.dev, motionsites.ai, wrapmarket.com — or the §11 catalogs) and re-spec.
@@ -2194,7 +2196,7 @@ Both files govern quality. Resolution:
 ### Phase 3 — final gates (engine-owned)
 
 **FIRST GATE (before ANY code):**
-- [ ] **DESIGN.md completeness gate:** `docs/DESIGN.md` exists and contains ALL 7 sections:
+- [ ] **DESIGN.md completeness gate:** `docs/DESIGN.md` exists and contains ALL 11 sections:
       1. Design Tokens (OKLCH, exact values — no placeholder/variable references) — **dark-mode pairings for EVERY semantic color; both themes mandatory, class-based toggle, AA on both**
       2. Layout Grid (exact max-width, gutters, margins, breakpoints)
       3. Component Specifications (every component in the app with exact height, padding, font, radius, bg, border, shadow, focus, hover, active, disabled states)
@@ -2418,7 +2420,8 @@ never silently stopped mid-evidence.
    user flows as test scripts → `tests/e2e/recorded/`; committed for CI.
 7. **Visual regression baseline update.** Pixelmatch compares before/after;
    if improvements pass threshold → update `docs/visual-baselines/`.
-8. **Evidence close-out.** Run axe-core/Lighthouse on the core pages and
+8. **Evidence close-out.**
+    - **Prize-worthiness gate (the H5 mechanical gate).** Run `node scripts/prize-gate.js <project>` (6 criteria: palette distinctiveness, signature element, hero composition, AA contrast, animation budget, fresh-context review). Exit 0 = the shipped UI may claim "distinctive / prize-worthy"; the report lands in `docs/prize-gate.json` and is quoted into `DECISIONS.md`. A FAIL is reported as capped, never claimed. Run axe-core/Lighthouse on the core pages and
    record Core Web Vitals — with a browser tool where present, otherwise
    `npx lighthouse <url>` headless (Playwright's installed Chromium). Record
    per-surface before/after screenshot pairs under `docs/ui-gallery/` (from
@@ -2499,7 +2502,7 @@ never silently stopped mid-evidence.
 - CI grep runs on every PR for banned patterns (raw hex, `space-x-*`, `lorem`, `Acme`, `@ts-ignore`, `eslint-disable`, `outline-none`, `transition-all`, `animate-*` on static elements)
 - `impeccable critique` runs on 3 highest-value surfaces — ANY finding from this list = HIGH/CRITICAL = story blocks
 - Phase 4 IMPROVISE: mode-guided refine (Persuade→`bolder`/`delight`/`colorize`/`animate`; Operate→`polish`/`harden`/`distill`/`clarify`/`adapt`) — slop patterns get `distill`/`clarify`/`harden` treatment
-- Automated design-self-audit checkpoint at US-002 (token handoff) and every 10 stories: run the CI `design-gate.js` grep + `impeccable audit` over the shipped surfaces; if the grep is clean and audit finds no HIGH/CRITICAL from this list → PASS (recorded in `DECISIONS.md`). No human involved. Blocks the story if it fails; the supervisor fixes until clean.
+- Automated design-self-audit checkpoint at US-002 (token handoff) and every 10 stories: run the CI `design-gate.js` grep + `impeccable audit` over the shipped surfaces; if the grep is clean and audit finds no HIGH/CRITICAL from this list → PASS (recorded in `DECISIONS.md`). No human involved. Blocks the story if it fails; the supervisor fixes until clean. **Plus the prize-worthiness gate:** `node scripts/prize-gate.js <project>` (6 machine-checkable criteria — see Section 7). A FAIL means the surface may not claim "distinctive / prize-worthy"; the report is recorded in `docs/prize-gate.json`.
 
 ## Integrated skill map (every installed skill, and when it fires)
 

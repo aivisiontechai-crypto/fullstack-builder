@@ -54,3 +54,14 @@ scripts/pii-verify-seed.ts
 scripts/pitr-test.sh
 scripts/seed-from-prod.sh
 scripts/strix-wait.sh
+
+# Prize-worthiness gate artifacts (written by scripts/prize-gate.js)
+prize-gate.json
+contrast-audit.json
+prize-review.json
+docs/prize-gate.json
+docs/contrast-audit.json
+docs/prize-review.json
+docs/ui-gallery/
+docs/ui-baselines/
+docs/visual-baselines/

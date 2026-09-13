@@ -236,6 +236,33 @@ source rather than patched after the fact.
 
 ## Non-negotiables
 
+## Prize-worthiness gate (the H5 mechanical gate)
+
+A surface only claims "distinctive / prize-worthy" when it passes the
+machine-checkable validator shipped at `scripts/prize-gate.js` — 6 criteria,
+each mapping to a tool that actually exists:
+
+1. **Palette distinctiveness** — the `@theme` palette departs from the
+   default SaaS triad (blue/purple + Inter).
+2. **Signature element** — a hand-authored `@keyframes`/WebGL/Canvas/Rive/
+   Lottie/`react-three-fiber` asset in the bundle.
+3. **Hero composition** — not `[centered label, centered H1, centered button]`;
+   >=2 distinct blocks on different axes.
+4. **AA contrast** — axe-core/Lighthouse on the 3 highest-value surfaces.
+5. **Animation budget** — <=1 scroll-linked entrance per section, <=2
+   simultaneously-moving hero elements, no single animation over the cap.
+6. **Fresh-context adversarial review** — a subagent with no memory of the
+   build issues a verdict with cited evidence (`docs/prize-review.json`).
+
+The gate **fails if any criterion fails.** A text-only agent can never claim
+a look it could not see, and the gate enforces that: criterion 4 degrades to
+"not-run" rather than a fake pass when no contrast engine is installed, and
+criterion 6 fails loudly when no review is recorded. The pass is quoted into
+`DECISIONS.md` with the evidence, and the report lands in `docs/prize-gate.json`.
+
+Run it before claiming "distinctive": `node scripts/prize-gate.js <project>`.
+
+
 - **Hands-free** — no clarifying questions; every choice recorded in `docs/DECISIONS.md`.
 - **No mock/dummy/hardcoded data** — real DB, real auth, real migrations, real flows from the first slice. Tests may mock; e2e hits a real DB + running app.
 - **No hardcoded config** — secrets/URLs/flags from gitignored `.env`; `.env.example` ships with placeholders.
