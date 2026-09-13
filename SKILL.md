@@ -256,11 +256,13 @@ with the exact install command for the user's OS, never a silent skip:**
    headless-CLI fallback in Phase 4 step 5 (screenshots + HTTP checks) — the
    UI improvement program and its evidence still run.
 10. Engine-drift check (this skill cites specific engine anchors —
-      "the engine's 20 rules", the 14 doc files, `US-001`/`US-002`, "6c
-      checklist", "section 3's table"). Grep the installed `builder`/
-      `vibe-docs`/`vibe-build` — or the bundled copies at `skills/<name>/`
-      when the engine isn't installed in a discovery root — for each anchor
-      before launch; if any value
+      "the engine's 20 rules" is the *AGENTS.md* rule list, the 14 doc files
+      is vibe-docs' output table, `US-001`/`US-002` are the first two
+      stories, "6c checklist" is vibe-build's final validation pass, and
+      "section 3's table" is vibe-build's skill-loading table). Grep the
+      installed `builder`/`vibe-docs`/`vibe-build` — or the bundled copies at
+      `skills/<name>/` when the engine isn't installed in a discovery root —
+      for each anchor before launch; if any value
       changed (rule count, file list, story ids, section numbers), adapt this
       skill's references to the current reality and note the update in
       `DECISIONS.md` — never silently ship a stale citation.
@@ -328,7 +330,7 @@ with the exact install command for the user's OS, never a silent skip:**
        Cline `~/.cline/` or the VS Code MCP settings;
        Antigravity/Replit/other Agent-Skills hosts use their documented MCP
        config path or a project `.mcp.json`. Whichever host is detected
-       (Phase 0 prerequisite 2), read that host's config and check the
+       (Phase 0 prerequisite 14), read that host's config and check the
        server's stdio/sse command is reachable.
     2. **Configure** — if absent, start the server via its standard
        runner (`npx <mcp-package>`, `uvx`, or the tool's documented
@@ -1630,8 +1632,8 @@ with background jobs; `PERFORMANCE.md`/`SLO.md` mark undocumented targets
 
 ### 2. Generation order (dependency-aware)
 
-Integrates with the existing phases — **do not** run it as an 11-phase
-parallel pipeline. Where each doc is produced:
+Integrates with the existing phases — **do not** run it as a parallel
+pipeline. Where each doc is produced:
 
 - **Phase 0:** `MEMORY.md`, `CONSTRAINTS.md`, `CONSTITUTION.md`,
   `DOC_GOVERNANCE.md`, `AGENTS.md` (project root)
@@ -2618,7 +2620,7 @@ fullstack-builder/
 │   └── ralph-guard.{mjs,ps1}      # no-placeholder-data scan (cheap gate)
 ├── docs/
 │   ├── MEMORY.md                # project memory template (copied on first run)
-│   ├── DOC_TEMPLATES.md         # Documentation OS template bank (11 phases, all Tier-2 doc contracts)
+│   ├── DOC_TEMPLATES.md         # Documentation OS template bank (12 phases, ~78 doc contracts)
 │   └── adr/TEMPLATE.md          # ADR template (copied on first run)
 └── command/
     └── fullstack-builder.md     # slash-command wrapper — opencode only
@@ -2838,14 +2840,14 @@ See `docs/MEMORY.md` in this skill — contains sections for:
 - **Generation-time verification closes the enforcement hole (user question: "does speckit create detailed docs, not just placeholders?").** Investigation of the actual installed `/speckit.*` command files (`.opencode/commands/` of the reference project) showed `speckit.specify` has a built-in self-validation loop (write → own checklist → re-write up to 3 iterations) but `speckit.plan` and `speckit.tasks` have **no** quality loop — their richness depends on LLM diligence alone, and nothing would stop a thin PLAN.md/task list from reaching ralph. Added **Documentation OS §7: Generation-time verification** — after every constitution/specify/plan/tasks run, verify the output against that command's `MUST contain` list + the `DOC_TEMPLATES.md` contract (no TBD/placeholders/dangling `[NEEDS CLARIFICATION]`); thin = expand in place or re-run with the list as context, max 3 iterations, then halt + record in `DECISIONS.md` — NEVER proceed with a thin upstream doc. Quoted evidence per item, same rule as the DESIGN.md gate. Each of the four spec-kit command blocks now ends with `→ Verify after generation ... §7`.
 
 ### v2.4.0 (2026-09-10)
-- **Documentation OS (living-spec system) added.** Turned the doc set into a governed, drift-controlled operating system — not a static file dump. Ships `docs/DOC_TEMPLATES.md` (the 11-phase template bank, ~50 Tier-2 doc contracts with metadata + authority + dependencies) and adds a `Documentation OS` section to SKILL.md that defines: doc inventory (Tier 1 pre-existing + Tier 2 additions), dependency-aware generation order wired into Phases 0/1/1b/2, frontmatter metadata + authority precedence (CONSTITUTION > CONSTRAINTS > DOC_GOVERNANCE > source-of-truth > derived), stable-ID namespaces (`BR-###`, `REQ-###`, `SPEC-###`, `FLOW-###`, `AC-###`, `RULE-###`, `STATE-###`, `API-###`, `DATA-###`, `AI-###`, `SEC-###`, `TEST-###`, `ADR-###`, `US-###`), anti-duplication rules (defer by reference, never two sources of truth), and a 6-point living-spec audit (completeness, consistency, traceability, agent readiness, no-hallucinated-decisions, README index). New docs include the governance/control set (`DOC_GOVERNANCE.md`, `AGENTS.md`, `USER_FLOWS.md`, `BUSINESS_RULES.md`, `ACCEPTANCE_CRITERIA.md`, `STATE_MODEL.md`, `TRACEABILITY.md`, `DEFINITION_OF_DONE.md`, `DRIFT_CONTROL.md`), AI set (`AI_SPEC.md`/`AI_GUARDRAILS.md`/`AI_EVALS.md`/`AI_MEMORY.md`/`AI_CONTEXT.md`/`AI_COST.md`/`AI_MODEL_POLICY.md` — only when product has AI), UX/backend/data/security/quality/ops/project-mgmt sets. Preserves all 14 vibe-docs docs + 8 builder additions (Tier 1) — nothing renamed or replaced. `MEMORY.md` shipped template's phantom `/speckit.converge` reference corrected to the real `implement` + `checklist` mechanism.
+- **Documentation OS (living-spec system) added.** Turned the doc set into a governed, drift-controlled operating system — not a static file dump. Ships `docs/DOC_TEMPLATES.md` (the 12-phase template bank, ~78 doc contracts with metadata + authority + dependencies) and adds a `Documentation OS` section to SKILL.md that defines: doc inventory (Tier 1 pre-existing + Tier 2 additions), dependency-aware generation order wired into Phases 0/1/1b/2, frontmatter metadata + authority precedence (CONSTITUTION > CONSTRAINTS > DOC_GOVERNANCE > source-of-truth > derived), stable-ID namespaces (`BR-###`, `REQ-###`, `SPEC-###`, `FLOW-###`, `AC-###`, `RULE-###`, `STATE-###`, `API-###`, `DATA-###`, `AI-###`, `SEC-###`, `TEST-###`, `ADR-###`, `US-###`), anti-duplication rules (defer by reference, never two sources of truth), and a 6-point living-spec audit (completeness, consistency, traceability, agent readiness, no-hallucinated-decisions, README index). New docs include the governance/control set (`DOC_GOVERNANCE.md`, `AGENTS.md`, `USER_FLOWS.md`, `BUSINESS_RULES.md`, `ACCEPTANCE_CRITERIA.md`, `STATE_MODEL.md`, `TRACEABILITY.md`, `DEFINITION_OF_DONE.md`, `DRIFT_CONTROL.md`), AI set (`AI_SPEC.md`/`AI_GUARDRAILS.md`/`AI_EVALS.md`/`AI_MEMORY.md`/`AI_CONTEXT.md`/`AI_COST.md`/`AI_MODEL_POLICY.md` — only when product has AI), UX/backend/data/security/quality/ops/project-mgmt sets. Preserves all 14 vibe-docs docs + 8 builder additions (Tier 1) — nothing renamed or replaced. `MEMORY.md` shipped template's phantom `/speckit.converge` reference corrected to the real `implement` + `checklist` mechanism.
 
 ### v2.3.3 (2026-09-10)
 - **Docs were too thin (user report: "docs are there but not detailed enough").** The spec-kit templates are 40–130-line scaffolds — the detail came from how the LLM executed each `/speckit.*` command, and the skill's invocation instructions gave no content contract. Added **MUST contain** sections to all four spec-kit commands: **Constitution** (6 named principle sections, each with ≥3 concrete rules), **Specify** (numbered functional + non-functional requirements, per-route API contracts, full Prisma data model, requirement→story traceability matrix), **Plan** (phase breakdown, dependency graph, risk register, infrastructure plan, testing strategy, security plan), **Tasks** (every task has ID/title/REQ-id/constitution-principle/≥3 acceptance criteria/complexity/dependencies/US-map; no orphaned tasks). No placeholders, no TBD, no template-filler permitted.
 - **TRD.md added** (user request): new `docs/TRD.md` template shipped with the skill (stack lock-in, performance budgets, security requirements, data integrity, a11y level, environment matrix, external integrations, observed assumptions); written into the project during Phase 1 step 4 alongside vibe-docs' 14 docs; completeness gate updated to require it.
 
 ### v2.3.2 (2026-09-09)
-- **spec-kit wiring fixed (the "no docs appeared" bug).** Root cause: spec-kit's `/speckit.*` commands are **per-project**, installed by `specify init <project> --integration <agent>` into the project's command root — the skill never ran `specify init`, so **none of the `/speckit.*` commands existed** and every invocation silently produced nothing. Added `specify init` as a **mandatory** Phase 0.5 step (prerequisite 11) with an explicit post-init verification (check the detected backend's command root contains `speckit.constitution.md`); re-run if missing. Also fixed the phantom **`/speckit.converge`** command — spec-kit v0.8.x has **no `converge`** (verified against the real opencode integration manifest: `analyze, checklist, clarify, constitution, implement, plan, specify, tasks, taskstoissues`). Convergence is now `speckit.implement` (task validation via `check-prerequisites.sh --require-tasks`) + `speckit.checklist` (requirements-quality unit tests), with a `jq` fallback when spec-kit is degraded. Updated Phase 2 §2, Phase 3 gate, verification checklist, troubleshooting table, source map, skill-map row, and changelog; all remaining `/speckit.converge` mentions are explanatory notes confirming it doesn't exist.
+- **spec-kit wiring fixed (the "no docs appeared" bug).** Root cause: spec-kit's `/speckit.*` commands are **per-project**, installed by `specify init <project> --integration <agent>` into the project's command root — the skill never ran `specify init`, so **none of the `/speckit.*` commands existed** and every invocation silently produced nothing. Added `specify init` as a **mandatory** Phase 0.5 step (prerequisite 14) with an explicit post-init verification (check the detected backend's command root contains `speckit.constitution.md`); re-run if missing. Also fixed the phantom **`/speckit.converge`** command — spec-kit v0.8.x has **no `converge`** (verified against the real opencode integration manifest: `analyze, checklist, clarify, constitution, implement, plan, specify, tasks, taskstoissues`). Convergence is now `speckit.implement` (task validation via `check-prerequisites.sh --require-tasks`) + `speckit.checklist` (requirements-quality unit tests), with a `jq` fallback when spec-kit is degraded. Updated Phase 2 §2, Phase 3 gate, verification checklist, troubleshooting table, source map, skill-map row, and changelog; all remaining `/speckit.converge` mentions are explanatory notes confirming it doesn't exist.
 
 ### v2.3.1 (2026-09-09)
 - **Real validator replaces phantom `npx skills validate`.** The skills CLI (verified v1.5.18) has NO `validate` command, so §I's "independent validation" gate (which protects every self-edit of SKILL.md) would have been permanently a no-op — silently disabling self-modification. Added `scripts/skill-validate.js` (local, dependency-free): checks valid frontmatter (name + description), balanced code fences (catches truncated writes), and non-additive diffs via `--require-additive-only`. Updated §I dry-run + independent-validation steps, the self-evolve mechanism (line ~1678), and the shipped file-tree to use it. Verified PASS on clean skill, PASS on additive-only diff, FAIL on diffs with deletions. Version bumped to 2.3.1 (patch, per §I semver rule).
@@ -2877,7 +2879,7 @@ See `docs/MEMORY.md` in this skill — contains sections for:
 - **AI/LLM 2026+:** Vercel AI Gateway (100+ models, single key) + Workflows (suspend/resume) + Vercel Sandbox + AI Elements (npx ai-elements) + LangGraph (stateful agents/workflows) + Cohere v3/Jina/Voyage reranking + Local LLMs (Ollama/LM Studio/vLLM/TGI/llama.cpp) + MCP servers
 - **Real-time 2026+:** WebTransport (HTTP/3 bidirectional) + Automerge 2.0 (JSON CRDT) + RGA/Peritext (rich text CRDT) + ElectricSQL v1 (managed agents, durable streams, CDN cacheable, TanStack DB/PGlite) + Liveblocks MCP server
 - **Developer Experience 2026+:** pnpm 12.x (catalogs, strict node_modules, build script approval, patch deps, runtime mgmt, JSR) + Husky/lint-staged pre-commit + Changesets v3 + IDE integration (Cursor, VS Code Copilot, Zed) + GitHub Actions composite actions, pnpm store cache
-- **Extended stories:** US-001 to US-089 (89 stories total; US-087/088/089 are SaaS-only billing stories)
+- **Extended stories:** US-001 to US-089 (roughly nine-dozen stories; US-087/088/089 are SaaS-only billing stories)
 - **Extended Phase 3 gates:** 25+ new gates for all 2026+ capabilities
 
 ### v2.1.0 (2026-09-09)

@@ -27,3 +27,30 @@ Thumbs.db
 2026-fullstack-stack-research.json
 GAP_ANALYSIS_2026.json
 .playwright-mcp/
+
+# Dashboard / ralph supervisor runtime state (written by the skill at run start)
+.dashboard-url
+.dashboard-control
+scripts/ralph/.ralph.pid
+scripts/ralph/.iteration.pid
+scripts/ralph/.backend
+scripts/ralph/.last-branch
+scripts/ralph/.halt
+scripts/ralph/heartbeat.state
+scripts/ralph/.admin-credentials
+scripts/ralph/PROJECT-GRAPH.md
+scripts/ralph/archive/
+
+# Project-side scripts the agent authors into <project>/scripts/ during stories
+# (the skill repo ships only the skill-side tooling in scripts/ and bin/)
+scripts/db-backup.sh
+scripts/db-restore.sh
+scripts/db-restore-drill.sh
+scripts/db-rollback-test.sh
+scripts/flag-drift.sh
+scripts/gdpr-delete.sh
+scripts/migration-safety.sh
+scripts/pii-verify-seed.ts
+scripts/pitr-test.sh
+scripts/seed-from-prod.sh
+scripts/strix-wait.sh

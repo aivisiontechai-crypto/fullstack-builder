@@ -28,8 +28,8 @@ Single command, walk away, it finishes:
        ├─ Phase 0–1b   prerequisites, stack lock (pnpm 12, Prisma 8, Next 15),
        │               DESIGN.md (7 sections, locked before code), CONSTITUTION,
        │               spec-kit (constitution/specify/plan/tasks), Documentation OS
-       ├─ Phase 2      vibe-docs → 14 docs + prd.json with 89 stories
-       │               + ~50 governed docs (DOC_GOVERNANCE, USER_FLOWS,
+       ├─ Phase 2      vibe-docs → 14 docs + prd.json with a large story graph
+       │               + ~78 governed docs (DOC_GOVERNANCE, USER_FLOWS,
        │               ACCEPTANCE_CRITERIA, TRACEABILITY, AI_SPEC, THREAT_MODEL, ...)
        ├─ Phase 3      vibe-build ralph loop — ONE story per headless agent
        │               iteration, per-iteration UI gates, converge checkpoints,
@@ -172,7 +172,7 @@ fullstack-builder/
 │                                 # every other host loads it inline per Install)
 ├── docs/
 │   ├── MEMORY.md                # project memory template (copied on first run)
-│   ├── DOC_TEMPLATES.md         # Documentation OS template bank (11 phases, ~50 doc contracts)
+│   ├── DOC_TEMPLATES.md         # Documentation OS template bank (12 phases, ~78 doc contracts)
 │   └── adr/TEMPLATE.md          # ADR template (copied on first run)
 ```
 

@@ -45,8 +45,14 @@ const SPEC_ONLY = [
 
 function specAllows(designMd, feat) {
   if (!designMd) return false;
-  const spec = fs.readFileSync(designMd, "utf8").toLowerCase();
-  return spec.includes(feat);
+  // Match the feature token as a WHOLE WORD on its own line, not as a
+  // substring: the old `spec.includes(feat)` test let a single mention of
+  // "gradient" anywhere in DESIGN.md whitelist every bg-gradient/from-/to-
+  // usage in the entire codebase, and a mention of "blur" whitelisted
+  // backdrop-blur. Require the token to appear as a standalone spec entry.
+  const spec = fs.readFileSync(designMd, "utf8");
+  const re = new RegExp("(?:^|\\n)\\s*(?:-\\s*|\\*\\s*|#+\\s*)?" + feat.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b", "m");
+  return re.test(spec);
 }
 
 function collect(dir, files) {
